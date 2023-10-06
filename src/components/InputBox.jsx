@@ -37,11 +37,9 @@ const FormContainer = styled(FormControl)`
   border: none;
 `;
 
-// ... imports
-
 const InputBox = ({ isOpen, closeInput, addTodo }) => {
   const [task, setTask] = useState("");
-  const [status, setStatus] = useState("");
+  const [status, setStatus] = useState("Incomplete");
 
   const handleTodos = () => {
     if (task.trim() === "" || status.trim() === "") {
@@ -60,15 +58,6 @@ const InputBox = ({ isOpen, closeInput, addTodo }) => {
     setStatus("");
     closeInput();
   };
-
-  //  const handleChange = (e) => {
-  //     setTemp({ ...temp, tempStatus: e.target.value });
-  //     setStatus(e.target.value);
-  //   };
-
-  //   const handleTempTask = (e) => {
-  //     setTemp({ ...temp, tempTask: e.target.value });
-  //   };
 
   return (
     <StyledDialog open={isOpen} onClose={handleClose}>

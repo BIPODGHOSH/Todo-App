@@ -20,14 +20,10 @@ const Container = styled(Box)`
 
 const Header = styled(Box)`
   width: 60vw;
+  min-width: 340px;
   display: flex;
   justify-content: space-between;
 `;
-
-const initialTodos = {
-  task: "",
-  todoStatus: "",
-};
 
 const Home = () => {
   const [todos, setTodos] = useState([]);
@@ -49,28 +45,35 @@ const Home = () => {
     <>
       <Container>
         <Header>
-          <Button variant="contained" onClick={() => setInput(true)}>
-            Add Task
-          </Button>
-
-          <FormControl sx={{ m: 0, minWidth: 120 }}>
-            <Select
-              value={status}
-              onChange={handleChange}
-              displayEmpty
-              inputProps={{ "aria-label": "Without label" }}
+          <Box>
+            <Button
+              variant="contained"
+              style={{ minHeight: 55 }}
+              onClick={() => setInput(true)}
             >
-              <MenuItem value="All">All</MenuItem>
-              <MenuItem value="Incomplete">Incomplete</MenuItem>
-              <MenuItem value="Completed">Completed</MenuItem>
-            </Select>
-          </FormControl>
+              Add Task
+            </Button>
+          </Box>
+          <Box>
+            <FormControl sx={{ m: 0, minWidth: 120 }}>
+              <Select
+                value={status}
+                onChange={handleChange}
+                displayEmpty
+                inputProps={{ "aria-label": "Without label" }}
+              >
+                <MenuItem value="All">All</MenuItem>
+                <MenuItem value="Incomplete">Incomplete</MenuItem>
+                <MenuItem value="Completed">Completed</MenuItem>
+              </Select>
+            </FormControl>
+          </Box>
         </Header>
       </Container>
       {input && (
         <InputBox isOpen={input} closeInput={closeInput} addTodo={addTodo} />
       )}
-      <TodoList todos={todos} />
+      <TodoList todos={todos} setTodos={setTodos} isShow={status} />
     </>
   );
 };
