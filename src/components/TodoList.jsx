@@ -1,7 +1,6 @@
-import { Box, styled, Checkbox, Typography } from "@mui/material";
+import { Box, styled, Checkbox } from "@mui/material";
 import React from "react";
 import DeleteIcon from "@mui/icons-material/Delete";
-import { css } from "styled-components";
 
 const Container = styled(Box)`
   display: flex;
@@ -57,12 +56,38 @@ const Task = styled(Box)`
 
 const Status = styled(Box)`
   background-color: ${(props) =>
-    props.complete === "true" ? "#34d3d1" : "red"};
+    props.complete === "true" ? "#1ab7e3" : "#ffd100;"};
   padding: 10px;
   border-radius: 10px;
+  @media (max-wdth: 768px) {
+    max-width: 20px;
+    max-height: 20px;
+  }
+`;
+const TitleWrapper = styled(Box)`
+  min-width: 100px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  justify-content: space-between;
+`;
+const Date = styled(Box)`
+  margin: 0px;
+`;
+
+const Title = styled(Box)`
+  max-width: 500px;
+  @media (max-width: 768px) {
+    max-width: 100px;
+    height: auto;
+    text-overflow: inherit;
+    overflow: hidden;
+  }
 `;
 
 const label = { inputProps: { "aria-label": "Checkbox demo" } };
+
 const TodoList = ({ todos, setTodos, isShow }) => {
   const handleCheck = (index) => {
     const updatedTodos = [...todos];
@@ -106,9 +131,10 @@ const TodoList = ({ todos, setTodos, isShow }) => {
                     checked={todo.status === "Completed"}
                     onClick={() => handleCheck(index)}
                   />
-                  <Task>
-                    <Typography>{todo.task}</Typography>
-                  </Task>
+                  <TitleWrapper>
+                    <Title>{todo.task}</Title>
+                    <Date>{todo.date}</Date>
+                  </TitleWrapper>
                 </TaskWrapper>
                 <Task>
                   <Status
@@ -116,7 +142,10 @@ const TodoList = ({ todos, setTodos, isShow }) => {
                   >
                     {todo.status}
                   </Status>
-                  <DeleteIcon onClick={() => handleDelete(index)} />
+                  <DeleteIcon
+                    onClick={() => handleDelete(index)}
+                    fontSize="large"
+                  />
                 </Task>
               </Wrapper>
             ))}

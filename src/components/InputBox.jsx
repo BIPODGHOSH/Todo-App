@@ -17,10 +17,16 @@ import { styled } from "@mui/system"; // Import styled from @mui/system
 // Define a styled Dialog component
 const StyledDialog = styled(Dialog)`
   .MuiDialog-paper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
     background-color: var(--gray-1);
     height: 50vh;
     width: 50vw;
     border-radius: 10px;
+    @media (max-width: 768px) {
+      width: 80vw;
+    }
   }
 `;
 
@@ -28,6 +34,9 @@ const TextArea = styled(TextField)`
   width: 40vw;
   background-color: var(--white);
   border-radius: 10px;
+  @media (max-width: 768px) {
+    width: 65vw;
+  }
 `;
 
 const FormContainer = styled(FormControl)`
@@ -35,11 +44,22 @@ const FormContainer = styled(FormControl)`
   background-color: var(--white);
   border-radius: 10px;
   border: none;
+  @media (max-width: 768px) {
+    width: 65vw;
+  }
 `;
 
 const InputBox = ({ isOpen, closeInput, addTodo }) => {
   const [task, setTask] = useState("");
   const [status, setStatus] = useState("Incomplete");
+
+  const currentDate = new Date();
+
+  const day = currentDate.getDate().toString().padStart(2, "0");
+  const month = (currentDate.getMonth() + 1).toString().padStart(2, "0");
+  const year = currentDate.getFullYear().toString().substr(-2);
+
+  const formattedDate = `${day}/${month}/${year}`;
 
   const handleTodos = () => {
     if (task.trim() === "" || status.trim() === "") {
@@ -48,6 +68,7 @@ const InputBox = ({ isOpen, closeInput, addTodo }) => {
     const newTodo = {
       task: task,
       status: status,
+      date: formattedDate,
     };
 
     addTodo(newTodo);
@@ -62,7 +83,7 @@ const InputBox = ({ isOpen, closeInput, addTodo }) => {
   return (
     <StyledDialog open={isOpen} onClose={handleClose}>
       <DialogTitle>Add Todo</DialogTitle>
-      <DialogContent>
+      <DialogContent style={{ display: "flex", flexDirection: "column" }}>
         <label htmlFor="title">Title</label>
         <TextArea
           autoFocus
@@ -90,7 +111,9 @@ const InputBox = ({ isOpen, closeInput, addTodo }) => {
           </Select>
         </FormContainer>
       </DialogContent>
-      <DialogActions>
+      <DialogActions
+        style={{ display: "flex", justifyContent: "space-around" }}
+      >
         <Button variant="contained" onClick={handleTodos}>
           Add Task
         </Button>
