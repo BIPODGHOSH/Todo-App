@@ -2,7 +2,17 @@
   text-align: center;
   height: 100vh;
   width: 100vw;
-  background-color: var(--bg-1);
+
+  /* background-color: var(--bg-1); */
+  /* background-image: url("https://i.pinimg.com/originals/88/15/63/881563d6444b370fa4ceea0c3183bb4c.gif"); */
+  background: linear-gradient(
+    135deg,
+    #a49958 0%,
+    #77be75 25%,
+    #69a7f9 50%,
+    #9900b1 75%,
+    #9a0044 100%
+  );
   overflow: hidden;
 }
 

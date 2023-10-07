@@ -145,6 +145,7 @@ const TodoList = ({ todos, setTodos, isShow }) => {
                   <DeleteIcon
                     onClick={() => handleDelete(index)}
                     fontSize="large"
+                    style={{ color: "blue", marginLeft: 10 }}
                   />
                 </Task>
               </Wrapper>

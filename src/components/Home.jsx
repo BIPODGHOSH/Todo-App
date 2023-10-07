@@ -22,6 +22,7 @@ const Header = styled(Box)`
   width: 60vw;
   min-width: 340px;
   display: flex;
+
   justify-content: space-between;
 `;
 
@@ -61,6 +62,7 @@ const Home = () => {
                 onChange={handleChange}
                 displayEmpty
                 inputProps={{ "aria-label": "Without label" }}
+                style={{ backgroundColor: "white" }}
               >
                 <MenuItem value="All">All</MenuItem>
                 <MenuItem value="Incomplete">Incomplete</MenuItem>
